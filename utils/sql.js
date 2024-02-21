@@ -11,16 +11,16 @@ class User {
         this.user = user;
     }
 
-    async getUser() {
+    getUser() {
         return this.user;
     }
 
-    async unavailability() {
-        await db.serialize(() => {
-            db.get('SELECT id FROM user WHERE id=?', [this.user], (err, row) => {
-                if (!err) {
-                    return 1;
-                }
+    unavailability() {
+        return new Promise((resolve) => {
+            db.serialize(() => {
+                db.get('SELECT id FROM user WHERE id=?', [this.user], (row = row) => {
+                    resolve(Boolean(row));
+                });
             });
         });
     }
