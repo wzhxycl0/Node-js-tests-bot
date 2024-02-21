@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "configure": "node utils/configure.js",
-    "dev": "nodemon --env-file=.env bot/bot.js",
+    "dev": "nodemon --env-file=.env index.js",
     "release": "node --env-file=.env index.js"
   },
   "keywords": [],
