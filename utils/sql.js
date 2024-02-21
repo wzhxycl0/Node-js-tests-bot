@@ -16,10 +16,10 @@ class User {
     }
 
     async unavailability() {
-        db.serialize(() => {
+        await db.serialize(() => {
             db.get('SELECT id FROM user WHERE id=?', [this.user], (err, row) => {
                 if (!err) {
-                    return Boolean(row);
+                    return 1;
                 }
             });
         });

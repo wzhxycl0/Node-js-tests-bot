@@ -9,7 +9,9 @@ const start = () => {
         const user = new User(data.from.id);
         const text = data.text;
 
-        console.log(await user.unavailability());
+        const res = await user.unavailability();
+
+        console.log(res);
     });
 };
 
