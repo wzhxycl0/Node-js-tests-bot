@@ -1,0 +1,16 @@
+{
+    "en": {
+        "reg":   "Successfully registered!",
+        "error": "There's been a mistake. You can contact the creator t.me/wzhxycl1"
+    },
+
+    "ru": {
+        "reg":   "Успешно зарегистрировали!",
+        "error": "Произошла ошибка. Можете обратится к создателю t.me/wzhxycl1"
+    },
+
+    "ua": {
+        "reg":   "Успішно зареєстрували!",
+        "error": "Сталася помилка. Можете звернутися до творця t.me/wzhxycl1"
+    }
+}

@@ -12,11 +12,24 @@ class User {
     }
 
     unavailability() {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             db.serialize(() => {
                 db.get('SELECT id FROM user WHERE id=?', [this.user], (row = row) => {
                     resolve(Boolean(row));
                 });
+            });
+        });
+    }
+
+    reg(language) {
+        return new Promise(resolve => {
+            db.serialize(() => {
+                if (this.unavailability()) {
+                    db.run('INSERT INTO user VALUES (?, ?)', [this.user, language]);
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
             });
         });
     }
