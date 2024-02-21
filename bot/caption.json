@@ -1,16 +1,25 @@
 {
     "en": {
         "reg":   "Successfully registered!",
-        "error": "There's been a mistake. You can contact the creator t.me/wzhxycl1"
+        "error": "There's been a mistake. You can contact the creator t.me/wzhxycl1",
+        "goto":  "Menu",
+        "menu":  "Welcome to the bot menu for creating tests!",
+        "menu_kb": ["Profile", "Create a test"]
     },
 
     "ru": {
         "reg":   "Успешно зарегистрировали!",
-        "error": "Произошла ошибка. Можете обратится к создателю t.me/wzhxycl1"
+        "error": "Произошла ошибка. Можете обратится к создателю t.me/wzhxycl1",
+        "goto":  "Меню",
+        "menu":  "Добро пожаловать в меню бота для создания тестов!",
+        "menu_kb": ["Профиль", "Создать тест"]
     },
 
     "ua": {
         "reg":   "Успішно зареєстрували!",
-        "error": "Сталася помилка. Можете звернутися до творця t.me/wzhxycl1"
+        "error": "Сталася помилка. Можете звернутися до творця t.me/wzhxycl1",
+        "goto":  "Меню",
+        "menu":  "Ласкаво просимо в меню бота для створення тестів!",
+        "menu_kb": ["Профіль", "Створити тест"]
     }
 }

@@ -3,7 +3,7 @@ require('dotenv').config;
 const User = require('./../utils/sql');
 const TelegramApi = require('node-telegram-bot-api');
 const bot = new TelegramApi(process.env.TOKEN, { polling: true });
-const { language_kb } = require('./keyboard');
+const { language_kb, goto_kb, menu_kb } = require('./keyboard');
 const caption = require('./caption.json');
 
 const start = () => {
@@ -14,6 +14,9 @@ const start = () => {
 
         if (await user.unavailability()) {
             await bot.sendMessage(chat, 'Select a language!', { reply_markup: language_kb });
+        } else {
+            await bot.sendMessage(chat, caption[await user.get_language()]['menu'], 
+            {reply_markup: menu_kb(await user.get_language())});
         }
     });
 
@@ -23,14 +26,22 @@ const start = () => {
         const user = new User(data.from.id);
 
         if (text.startsWith('reg:')) {
-            const language = text.split(':')[1];
+            let language = text.split(':')[1];
             let res = caption[language];
+            
             if (await user.reg(language)) {
                 res = res.reg;
             } else {
                 res = res.error;
             }
-            await bot.editMessageText(res, {message_id: data.message.message_id, chat_id: chat});
+            
+            await bot.editMessageText(res, 
+                {message_id: data.message.message_id, chat_id: chat, 
+                reply_markup: goto_kb(language.slice(0, 2))});
+        } else if (text === 'goto') {
+            await bot.editMessageText(caption[await user.get_language()]['menu'], 
+            {message_id: data.message.message_id, chat_id: chat,
+            reply_markup: menu_kb(await user.get_language())});
         }
     });
 };

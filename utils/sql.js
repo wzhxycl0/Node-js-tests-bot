@@ -11,7 +11,7 @@ class User {
 
     unavailability() {
         return new Promise(resolve => {
-            db.get('SELECT id FROM user', (err, row) => {
+            db.get('SELECT id FROM user WHERE id=?', [this.user],  (err, row) => {
                 resolve(!Boolean(row));
             });
         });
@@ -25,6 +25,14 @@ class User {
             } else {
                 resolve(false);
             }
+        });
+    }
+
+    get_language() {
+        return new Promise(resolve => {
+            db.get('SELECT language FROM user WHERE id=?', [this.user], (err, row) => {
+                resolve(row.language);
+            });
         });
     }
 }
