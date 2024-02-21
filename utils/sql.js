@@ -23,8 +23,8 @@ class User {
 
     reg(language) {
         return new Promise(resolve => {
-            db.serialize(() => {
-                if (this.unavailability()) {
+            db.serialize(async () => {
+                if (await this.unavailability()) {
                     db.run('INSERT INTO user VALUES (?, ?)', [this.user, language]);
                     resolve(true);
                 } else {

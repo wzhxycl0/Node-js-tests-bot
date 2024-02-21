@@ -11,8 +11,8 @@ const start = () => {
         const chat = data.chat.id;
         const text = data.text;
         const user = new User(data.from.id);
-        
-        if (!(await user.unavailability())) {
+
+        if (await user.unavailability()) {
             await bot.sendMessage(chat, 'Select a language!', { reply_markup: language_kb });
         }
     });
@@ -28,7 +28,7 @@ const start = () => {
             if (await user.reg(language)) {
                 res = res.reg;
             } else {
-                res.error;
+                res = res.error;
             }
             await bot.editMessageText(res, {message_id: data.message.message_id, chat_id: chat});
         }
