@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "configure": "node utils/configure.js"
+    "configure": "node utils/configure.js",
+    "dev": "nodemon --env-file=.env bot/bot.js",
+    "release": "node --env-file=.env index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "node-telegram-bot-api": "^0.64.0",
     "nodemon": "^3.0.3"
   }
