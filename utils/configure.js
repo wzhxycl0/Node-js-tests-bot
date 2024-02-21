@@ -33,10 +33,8 @@ function overwrite_config() {
     });
 }
 
-fs.stat(file_path, (err, stats) => {
-    if (err) {
-        create_config();
-    } else {
-        overwrite_config();
-    }
-});
+if (fs.existsSync(file_path)) {
+    overwrite_config();
+} else {
+    create_config();
+}
