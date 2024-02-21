@@ -1,0 +1,16 @@
+{
+  "name": "node-js-tests-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "configure": "node utils/configure.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.64.0",
+    "nodemon": "^3.0.3"
+  }
+}
