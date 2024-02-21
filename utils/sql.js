@@ -1,11 +1,18 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('user.db');
 
-db.run('CREATE TABLE IF NOT EXISTS user (id INTEGER, language TEXT)');
+db.serialize(() => {
+    db.run('CREATE TABLE IF NOT EXISTS user (id INTEGER, language TEXT)');
+});
+
 
 class User {
     constructor(user) {
         this.user = user;
+    }
+
+    getUser() {
+        return this.user;
     }
 
     unavailability() {
@@ -18,3 +25,5 @@ class User {
         });
     }
 }
+
+module.exports = User;
