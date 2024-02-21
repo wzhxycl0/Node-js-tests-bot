@@ -11,10 +11,6 @@ class User {
         this.user = user;
     }
 
-    getUser() {
-        return this.user;
-    }
-
     unavailability() {
         return new Promise((resolve) => {
             db.serialize(() => {
