@@ -11,17 +11,17 @@ class User {
         this.user = user;
     }
 
-    getUser() {
+    async getUser() {
         return this.user;
     }
 
-    unavailability() {
-        db.get('SELECT id FROM user WHERE id=?', [this.user], (err, row) => {
-            if (err) {
-                console.error(err);
-            } else {
-                return !Boolean(row);
-            }
+    async unavailability() {
+        db.serialize(() => {
+            db.get('SELECT id FROM user WHERE id=?', [this.user], (err, row) => {
+                if (!err) {
+                    return Boolean(row);
+                }
+            });
         });
     }
 }

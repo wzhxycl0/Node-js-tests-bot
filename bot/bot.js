@@ -9,9 +9,7 @@ const start = () => {
         const user = new User(data.from.id);
         const text = data.text;
 
-        if (user.unavailability()) {
-            await bot.sendMessage(user.getUser(), text);
-        }
+        console.log(await user.unavailability());
     });
 };
 
