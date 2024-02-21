@@ -6,3 +6,6 @@
 
 # Local configuration
 /.env
+
+# Database
+/user.db
