@@ -35,6 +35,14 @@ class User {
             });
         });
     }
+
+    get_id() {
+        return new Promise(resolve => {
+            db.get('SELECT * FROM user WHERE id=?', [this.user], (err, row) => {
+                resolve(row.id);
+            });
+        });
+    }
 }
 
 module.exports = User;

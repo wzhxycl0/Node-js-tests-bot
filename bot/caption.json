@@ -4,7 +4,8 @@
         "error": "There's been a mistake. You can contact the creator t.me/wzhxycl1",
         "goto":  "Menu",
         "menu":  "Welcome to the bot menu for creating tests!",
-        "menu_kb": ["Profile", "Create a test"]
+        "menu_kb": ["Profile", "Create a test"],
+        "profile": ["Your profile", "ID:"]
     },
 
     "ru": {
@@ -12,7 +13,8 @@
         "error": "Произошла ошибка. Можете обратится к создателю t.me/wzhxycl1",
         "goto":  "Меню",
         "menu":  "Добро пожаловать в меню бота для создания тестов!",
-        "menu_kb": ["Профиль", "Создать тест"]
+        "menu_kb": ["Профиль", "Создать тест"],
+        "profile": ["Ваш профиль", "ID:"]
     },
 
     "ua": {
@@ -20,6 +22,7 @@
         "error": "Сталася помилка. Можете звернутися до творця t.me/wzhxycl1",
         "goto":  "Меню",
         "menu":  "Ласкаво просимо в меню бота для створення тестів!",
-        "menu_kb": ["Профіль", "Створити тест"]
+        "menu_kb": ["Профіль", "Створити тест"],
+        "profile": ["Ваш профіль", "ID:"]
     }
 }

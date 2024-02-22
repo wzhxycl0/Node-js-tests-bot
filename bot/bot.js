@@ -15,8 +15,10 @@ const start = () => {
         if (await user.unavailability()) {
             await bot.sendMessage(chat, 'Select a language!', { reply_markup: language_kb });
         } else {
-            await bot.sendMessage(chat, caption[await user.get_language()]['menu'], 
-            {reply_markup: menu_kb(await user.get_language())});
+            const language = await user.get_language()
+            
+            await bot.sendMessage(chat, caption[language].menu, 
+            {reply_markup: menu_kb(language)});
         }
     });
 
@@ -38,10 +40,20 @@ const start = () => {
             await bot.editMessageText(res, 
                 {message_id: data.message.message_id, chat_id: chat, 
                 reply_markup: goto_kb(language.slice(0, 2))});
-        } else if (text === 'goto') {
-            await bot.editMessageText(caption[await user.get_language()]['menu'], 
-            {message_id: data.message.message_id, chat_id: chat,
-            reply_markup: menu_kb(await user.get_language())});
+        
+        } else {
+            const language = await user.get_language();
+
+            if (text === 'goto') {
+                await bot.editMessageText(caption[language].menu, 
+                {message_id: data.message.message_id, chat_id: chat,
+                reply_markup: menu_kb(language)});
+            
+            } else if (text === 'profile') {
+                await bot.editMessageText(`${caption[language].profile[0]}\n\n${caption[language].profile[1]} ${await user.get_id()}`,
+                {message_id: data.message.message_id, chat_id: chat,
+                reply_markup: goto_kb(language)});
+            }
         }
     });
 };
