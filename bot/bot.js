@@ -57,9 +57,9 @@ const start = () => {
                 reply_markup: kb.menu()});
             
             } else if ( text === 'profile' ) {
-                await bot.editMessageText(`${caption[language].profile[0]}\n\n${caption[language].profile[1]} ${user}`,
+                await bot.editMessageText(`${caption[language].profile[0]}\n\n${caption[language].profile[1]} ${chat}`,
                 {message_id: data.message.message_id, chat_id: chat,
-                reply_markup: kb.goto()});
+                reply_markup: kb.profile()});
             
             } else if ( text === 'create_test' ) {
                 await user.set_state(1);

@@ -7,7 +7,8 @@
         "menu_kb": ["Profile", "Create a test"],
         "profile": ["Your profile", "ID:"],
         "set_test_name": "Enter a title for the test",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "get_tests": "Get my tests"
     },
 
     "ru": {
@@ -18,7 +19,8 @@
         "menu_kb": ["Профиль", "Создать тест"],
         "profile": ["Ваш профиль", "ID:"],
         "set_test_name": "Введите название для теста",
-        "cancel": "Отмена"
+        "cancel": "Отмена",
+        "get_tests": "Получить мои тесты"
     },
 
     "ua": {
@@ -29,6 +31,7 @@
         "menu_kb": ["Профіль", "Створити тест"],
         "profile": ["Ваш профіль", "ID:"],
         "set_test_name": "Введіть назву тесту",
-        "cancel": "Скасувати"
+        "cancel": "Скасувати",
+        "get_tests": "Отримати мої тести"
     }
 }

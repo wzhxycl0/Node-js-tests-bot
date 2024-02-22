@@ -14,10 +14,19 @@ class Keyboard {
         this.language = language;
     }
 
+    profile() {
+        return JSON.stringify({
+            inline_keyboard: [
+                [{'text': caption[this.language].get_tests, 'callback_data': 'get_tests'}],
+                [{'text': caption[this.language].goto, 'callback_data': 'goto'}]
+            ]
+        });
+    }
+
     goto() {
         return JSON.stringify({
             inline_keyboard: [
-                [{'text': caption[this.language]['goto'], 'callback_data': 'goto'}]
+                [{'text': caption[this.language].goto, 'callback_data': 'goto'}]
             ]
         });
     };
