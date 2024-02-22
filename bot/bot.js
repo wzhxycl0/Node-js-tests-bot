@@ -3,8 +3,7 @@ require('dotenv').config;
 const User = require('./../utils/sql');
 const TelegramApi = require('node-telegram-bot-api');
 const bot = new TelegramApi(process.env.TOKEN, { polling: true });
-const { language_kb, goto_kb, 
-        menu_kb, create_test_kb } = require('./keyboard');
+const { language_kb, Keyboard } = require('./keyboard');
 const caption = require('./caption.json');
 
 const start = () => {
@@ -16,10 +15,11 @@ const start = () => {
         if (await user.unavailability()) {
             await bot.sendMessage(chat, 'Select a language!', { reply_markup: language_kb });
         } else {
-            const language = await user.get_language()
+            const language = await user.get_language();
+            const kb = new Keyboard(language);
             
             await bot.sendMessage(chat, caption[language].menu, 
-            {reply_markup: menu_kb(language)});
+            {reply_markup: kb.menu()});
         }
     });
 
@@ -28,11 +28,11 @@ const start = () => {
         const text = data.data;
         const user = new User(data.from.id);
 
-        if (text.startsWith('reg:')) {
+        if ( text.startsWith('reg:') ) {
             let language = text.split(':')[1];
             let res = caption[language];
             
-            if (await user.reg(language)) {
+            if ( await user.reg(language) ) {
                 res = res.reg;
             } else {
                 res = res.error;
@@ -40,24 +40,28 @@ const start = () => {
             
             await bot.editMessageText(res, 
                 {message_id: data.message.message_id, chat_id: chat, 
-                reply_markup: goto_kb(language.slice(0, 2))});
+                reply_markup: new Keyboard(language.slice(0, 2)).goto()});
         
         } else {
             const language = await user.get_language();
+            const kb = new Keyboard(language);
 
-            if (text === 'goto') {
+            if ( text === 'goto' ) {
                 await bot.editMessageText(caption[language].menu, 
                 {message_id: data.message.message_id, chat_id: chat,
-                reply_markup: menu_kb(language)});
+                reply_markup: kb.menu()});
             
-            } else if (text === 'profile') {
+            } else if ( text === 'profile' ) {
                 await bot.editMessageText(`${caption[language].profile[0]}\n\n${caption[language].profile[1]} ${await user.get_id()}`,
                 {message_id: data.message.message_id, chat_id: chat,
-                reply_markup: goto_kb(language)});
-            } else if (text === 'create_test') {
+                reply_markup: kb.goto()});
+            
+            } else if ( text === 'create_test' ) {
                 await bot.editMessageText(caption[language].set_test_name, 
                     {message_id: data.message.message_id, chat_id: chat,
-                    reply_markup: create_test_kb(language)});
+                    reply_markup: kb.goto()});
+            } else if ( text === 'cancel' ) {
+                user.state_set(0);
             }
         }
     });

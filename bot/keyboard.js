@@ -8,30 +8,37 @@ const language_kb = JSON.stringify({
     ]
 });
 
-const goto_kb = (language) => {
-    return JSON.stringify({
-        inline_keyboard: [
-            [{'text': caption[language]['goto'], 'callback_data': 'goto'}]
-        ]
-    });
-};
 
-const menu_kb = (language) => {
-    return JSON.stringify({
-        inline_keyboard: [
-            [{'text': caption[language]['menu_kb'][0], 'callback_data': 'profile'}],
-            [{'text': caption[language]['menu_kb'][1], 'callback_data': 'create_test'}]
-        ]
-    });
-};
+class Keyboard {
+    constructor(language) {
+        this.language = language;
+    }
 
-const create_test_kb = (language) => {
-    return JSON.stringify({
-        inline_keyboard: [
-            [{'text': caption[language].cancel, 'callback_data': 'cancel'}]
-        ]
-    });
+    goto() {
+        return JSON.stringify({
+            inline_keyboard: [
+                [{'text': caption[this.language]['goto'], 'callback_data': 'goto'}]
+            ]
+        });
+    };
+    
+    menu() {
+        return JSON.stringify({
+            inline_keyboard: [
+                [{'text': caption[this.language]['menu_kb'][0], 'callback_data': 'profile'}],
+                [{'text': caption[this.language]['menu_kb'][1], 'callback_data': 'create_test'}]
+            ]
+        });
+    };
+    
+    create_test() {
+        return JSON.stringify({
+            inline_keyboard: [
+                [{'text': caption[this.language].cancel, 'callback_data': 'cancel'}]
+            ]
+        });
+    }
 }
 
-module.exports = { language_kb, goto_kb, 
-                menu_kb, create_test_kb };
+
+module.exports = { language_kb, Keyboard };

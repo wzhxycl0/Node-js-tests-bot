@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('user.db');
 
-db.run('CREATE TABLE IF NOT EXISTS user (id INTEGER, language TEXT)');
+db.run('CREATE TABLE IF NOT EXISTS user (id int, language str, state int DEFAULT 0)');
 
 
 class User {
@@ -20,7 +20,7 @@ class User {
     reg(language) {
         return new Promise(async resolve => {
             if (await this.unavailability()) {
-                db.run('INSERT INTO user VALUES (?, ?)', [this.user, language]);
+                db.run('INSERT INTO user (id, language) VALUES (?, ?)', [this.user, language]);
                 resolve(true);
             } else {
                 resolve(false);
@@ -42,6 +42,10 @@ class User {
                 resolve(row.id);
             });
         });
+    }
+
+    state_set(value) {
+        db.run('UPDATE user SET state=? WHERE id=?', [value, this.user]);
     }
 }
 
