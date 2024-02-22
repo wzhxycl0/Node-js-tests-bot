@@ -3,7 +3,8 @@ require('dotenv').config;
 const User = require('./../utils/sql');
 const TelegramApi = require('node-telegram-bot-api');
 const bot = new TelegramApi(process.env.TOKEN, { polling: true });
-const { language_kb, goto_kb, menu_kb } = require('./keyboard');
+const { language_kb, goto_kb, 
+        menu_kb, create_test_kb } = require('./keyboard');
 const caption = require('./caption.json');
 
 const start = () => {
@@ -53,6 +54,10 @@ const start = () => {
                 await bot.editMessageText(`${caption[language].profile[0]}\n\n${caption[language].profile[1]} ${await user.get_id()}`,
                 {message_id: data.message.message_id, chat_id: chat,
                 reply_markup: goto_kb(language)});
+            } else if (text === 'create_test') {
+                await bot.editMessageText(caption[language].set_test_name, 
+                    {message_id: data.message.message_id, chat_id: chat,
+                    reply_markup: create_test_kb(language)});
             }
         }
     });

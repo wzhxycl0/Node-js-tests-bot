@@ -25,4 +25,13 @@ const menu_kb = (language) => {
     });
 };
 
-module.exports = { language_kb, goto_kb, menu_kb };
+const create_test_kb = (language) => {
+    return JSON.stringify({
+        inline_keyboard: [
+            [{'text': caption[language].cancel, 'callback_data': 'cancel'}]
+        ]
+    });
+}
+
+module.exports = { language_kb, goto_kb, 
+                menu_kb, create_test_kb };

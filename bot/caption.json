@@ -5,7 +5,9 @@
         "goto":  "Menu",
         "menu":  "Welcome to the bot menu for creating tests!",
         "menu_kb": ["Profile", "Create a test"],
-        "profile": ["Your profile", "ID:"]
+        "profile": ["Your profile", "ID:"],
+        "set_test_name": "Enter a title for the test",
+        "cancel": "Cancel"
     },
 
     "ru": {
@@ -14,7 +16,9 @@
         "goto":  "Меню",
         "menu":  "Добро пожаловать в меню бота для создания тестов!",
         "menu_kb": ["Профиль", "Создать тест"],
-        "profile": ["Ваш профиль", "ID:"]
+        "profile": ["Ваш профиль", "ID:"],
+        "set_test_name": "Введите название для теста",
+        "cancel": "Отмена"
     },
 
     "ua": {
@@ -23,6 +27,8 @@
         "goto":  "Меню",
         "menu":  "Ласкаво просимо в меню бота для створення тестів!",
         "menu_kb": ["Профіль", "Створити тест"],
-        "profile": ["Ваш профіль", "ID:"]
+        "profile": ["Ваш профіль", "ID:"],
+        "set_test_name": "Введіть назву тесту",
+        "cancel": "Скасувати"
     }
 }
