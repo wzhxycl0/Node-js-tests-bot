@@ -36,15 +36,15 @@ class User {
         });
     }
 
-    get_id() {
+    get_state() {
         return new Promise(resolve => {
-            db.get('SELECT * FROM user WHERE id=?', [this.user], (err, row) => {
-                resolve(row.id);
+            db.get('SELECT state FROM user WHERE id=?', [this.user], (err, row) => {
+                resolve(row.state);
             });
         });
     }
 
-    state_set(value) {
+    set_state(value) {
         db.run('UPDATE user SET state=? WHERE id=?', [value, this.user]);
     }
 }

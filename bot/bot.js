@@ -14,6 +14,11 @@ const start = () => {
 
         if (await user.unavailability()) {
             await bot.sendMessage(chat, 'Select a language!', { reply_markup: language_kb });
+
+        } else if ( await user.get_state() == 1 ) {
+            await bot.sendMessage(chat, text);
+            await user.set_state(0);
+
         } else {
             const language = await user.get_language();
             const kb = new Keyboard(language);
@@ -52,16 +57,21 @@ const start = () => {
                 reply_markup: kb.menu()});
             
             } else if ( text === 'profile' ) {
-                await bot.editMessageText(`${caption[language].profile[0]}\n\n${caption[language].profile[1]} ${await user.get_id()}`,
+                await bot.editMessageText(`${caption[language].profile[0]}\n\n${caption[language].profile[1]} ${user}`,
                 {message_id: data.message.message_id, chat_id: chat,
                 reply_markup: kb.goto()});
             
             } else if ( text === 'create_test' ) {
+                await user.set_state(1);
                 await bot.editMessageText(caption[language].set_test_name, 
                     {message_id: data.message.message_id, chat_id: chat,
-                    reply_markup: kb.goto()});
+                    reply_markup: kb.create_test()});
+            
             } else if ( text === 'cancel' ) {
-                user.state_set(0);
+                await bot.editMessageText(caption[language].menu, 
+                {message_id: data.message.message_id, chat_id: chat,
+                reply_markup: kb.menu()});
+                user.set_state(0);
             }
         }
     });
