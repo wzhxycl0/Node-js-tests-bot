@@ -47,6 +47,20 @@ class Keyboard {
             ]
         });
     }
+
+    async render_tests(user) {
+        let row = await user.get_tests();
+
+        let kb = [];
+
+        row.forEach((row) => {
+            kb.push([{'text': row.title, 'callback_data': `test:${row.title}`}]);
+        });
+
+        return JSON.stringify({
+            inline_keyboard: kb
+        });
+    }
 }
 
 

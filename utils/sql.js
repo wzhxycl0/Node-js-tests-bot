@@ -2,6 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('user.db');
 
 db.run('CREATE TABLE IF NOT EXISTS user (id int, language str, state int DEFAULT 0)');
+db.run('CREATE TABLE IF NOT EXISTS test (creator_id int, title str)');
 
 
 class User {
@@ -47,6 +48,15 @@ class User {
     set_state(value) {
         db.run('UPDATE user SET state=? WHERE id=?', [value, this.user]);
     }
+
+    get_tests() {
+        return new Promise(resolve => {
+            db.all('SELECT title FROM test WHERE id=?', [this.user], (err, row) => {
+                return row;
+            });
+        });
+    }
 }
+
 
 module.exports = User;

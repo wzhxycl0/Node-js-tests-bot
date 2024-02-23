@@ -72,6 +72,11 @@ const start = () => {
                 {message_id: data.message.message_id, chat_id: chat,
                 reply_markup: kb.menu()});
                 user.set_state(0);
+            
+            } else if ( text === 'get_tests' ) {
+                await bot.editMessageText(caption.get_tests[language], 
+                {message_id: data.message.message_id, chat_id: chat,
+                reply_markup: kb.render_tests(user)});
             }
         }
     });
