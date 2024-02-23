@@ -1,37 +1,47 @@
 {
-    "en": {
-        "reg":   "Successfully registered!",
-        "error": "There's been a mistake. You can contact the creator t.me/wzhxycl1",
-        "goto":  "Menu",
-        "menu":  "Welcome to the bot menu for creating tests!",
-        "menu_kb": ["Profile", "Create a test"],
-        "profile": ["Your profile", "ID:"],
-        "set_test_name": "Enter a title for the test",
-        "cancel": "Cancel",
-        "get_tests": "Get my tests"
+    "reg": {
+        "en": "Successfully registered!",
+        "ru": "Успешно зарегистрировали!",
+        "ua": "Успішно зареєстрували!"
     },
-
-    "ru": {
-        "reg":   "Успешно зарегистрировали!",
-        "error": "Произошла ошибка. Можете обратится к создателю t.me/wzhxycl1",
-        "goto":  "Меню",
-        "menu":  "Добро пожаловать в меню бота для создания тестов!",
-        "menu_kb": ["Профиль", "Создать тест"],
-        "profile": ["Ваш профиль", "ID:"],
-        "set_test_name": "Введите название для теста",
-        "cancel": "Отмена",
-        "get_tests": "Получить мои тесты"
+    "error": {
+        "en": "There's been a mistake. You can contact the creator t.me/wzhxycl1",
+        "ru": "Произошла ошибка. Можете обратится к создателю t.me/wzhxycl1",
+        "ua": "Сталася помилка. Можете звернутися до творця t.me/wzhxycl1"
     },
-
-    "ua": {
-        "reg":   "Успішно зареєстрували!",
-        "error": "Сталася помилка. Можете звернутися до творця t.me/wzhxycl1",
-        "goto":  "Меню",
-        "menu":  "Ласкаво просимо в меню бота для створення тестів!",
-        "menu_kb": ["Профіль", "Створити тест"],
-        "profile": ["Ваш профіль", "ID:"],
-        "set_test_name": "Введіть назву тесту",
-        "cancel": "Скасувати",
-        "get_tests": "Отримати мої тести"
+    "goto": {
+        "en": "Menu",
+        "ru": "Меню",
+        "ua": "Меню"
+    },
+    "menu": {
+        "en": "Welcome to the bot menu for creating tests!",
+        "ru": "Добро пожаловать в меню бота для создания тестов!",
+        "ua": "Ласкаво просимо в меню бота для створення тестів!"
+    },
+    "menu_kb": {
+        "en": ["Profile", "Create a test"],
+        "ru": ["Профиль", "Создать тест"],
+        "ua": ["Профіль", "Створити тест"]
+    },
+    "profile": {
+        "en": ["Your profile", "ID:"],
+        "ru": ["Ваш профиль", "ID:"],
+        "ua": ["Ваш профіль", "ID:"]
+    },
+    "set_test_name": {
+        "en": "Enter a title for the test",
+        "ru": "Введите название для теста",
+        "ua": "Введіть назву тесту"
+    },
+    "cancel": {
+        "en": "Cancel",
+        "ru": "Отмена",
+        "ua": "Скасувати"
+    },
+    "get_tests": {
+        "en": "Get my tests",
+        "ru": "Получить мои тесты",
+        "ua": "Отримати мої тести"
     }
 }

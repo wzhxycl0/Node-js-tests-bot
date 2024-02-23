@@ -17,8 +17,8 @@ class Keyboard {
     profile() {
         return JSON.stringify({
             inline_keyboard: [
-                [{'text': caption[this.language].get_tests, 'callback_data': 'get_tests'}],
-                [{'text': caption[this.language].goto, 'callback_data': 'goto'}]
+                [{'text': caption.get_tests[this.language], 'callback_data': 'get_tests'}],
+                [{'text': caption.goto[this.language], 'callback_data': 'goto'}]
             ]
         });
     }
@@ -26,7 +26,7 @@ class Keyboard {
     goto() {
         return JSON.stringify({
             inline_keyboard: [
-                [{'text': caption[this.language].goto, 'callback_data': 'goto'}]
+                [{'text': caption.goto[this.language], 'callback_data': 'goto'}]
             ]
         });
     };
@@ -34,8 +34,8 @@ class Keyboard {
     menu() {
         return JSON.stringify({
             inline_keyboard: [
-                [{'text': caption[this.language]['menu_kb'][0], 'callback_data': 'profile'}],
-                [{'text': caption[this.language]['menu_kb'][1], 'callback_data': 'create_test'}]
+                [{'text': caption.menu_kb[this.language][0], 'callback_data': 'profile'}],
+                [{'text': caption.menu_kb[this.language][1], 'callback_data': 'create_test'}]
             ]
         });
     };
@@ -43,7 +43,7 @@ class Keyboard {
     create_test() {
         return JSON.stringify({
             inline_keyboard: [
-                [{'text': caption[this.language].cancel, 'callback_data': 'cancel'}]
+                [{'text': caption.cancel[this.language], 'callback_data': 'cancel'}]
             ]
         });
     }

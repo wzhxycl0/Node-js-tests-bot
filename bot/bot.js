@@ -23,7 +23,7 @@ const start = () => {
             const language = await user.get_language();
             const kb = new Keyboard(language);
             
-            await bot.sendMessage(chat, caption[language].menu, 
+            await bot.sendMessage(chat, caption.menu[language], 
             {reply_markup: kb.menu()});
         }
     });
@@ -35,7 +35,7 @@ const start = () => {
 
         if ( text.startsWith('reg:') ) {
             let language = text.split(':')[1];
-            let res = caption[language];
+            let res = caption;
             
             if ( await user.reg(language) ) {
                 res = res.reg;
@@ -43,7 +43,7 @@ const start = () => {
                 res = res.error;
             }
             
-            await bot.editMessageText(res, 
+            await bot.editMessageText(res[language], 
                 {message_id: data.message.message_id, chat_id: chat, 
                 reply_markup: new Keyboard(language.slice(0, 2)).goto()});
         
@@ -52,23 +52,23 @@ const start = () => {
             const kb = new Keyboard(language);
 
             if ( text === 'goto' ) {
-                await bot.editMessageText(caption[language].menu, 
+                await bot.editMessageText(caption.menu[language], 
                 {message_id: data.message.message_id, chat_id: chat,
                 reply_markup: kb.menu()});
             
             } else if ( text === 'profile' ) {
-                await bot.editMessageText(`${caption[language].profile[0]}\n\n${caption[language].profile[1]} ${chat}`,
+                await bot.editMessageText(`${caption.profile[language][0]}\n\n${caption.profile[language][1]} ${chat}`,
                 {message_id: data.message.message_id, chat_id: chat,
                 reply_markup: kb.profile()});
             
             } else if ( text === 'create_test' ) {
                 await user.set_state(1);
-                await bot.editMessageText(caption[language].set_test_name, 
+                await bot.editMessageText(caption.set_test_name[language], 
                     {message_id: data.message.message_id, chat_id: chat,
                     reply_markup: kb.create_test()});
             
             } else if ( text === 'cancel' ) {
-                await bot.editMessageText(caption[language].menu, 
+                await bot.editMessageText(caption.menu[language], 
                 {message_id: data.message.message_id, chat_id: chat,
                 reply_markup: kb.menu()});
                 user.set_state(0);
