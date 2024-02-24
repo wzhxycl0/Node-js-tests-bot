@@ -73,6 +73,15 @@ class Keyboard {
             ]
         });
     }
+
+    test_edit(id) {
+        return JSON.stringify({
+            inline_keyboard: [
+                [{'text': caption.add_question[this.language], 'callback_data': `add:${id}`}],
+                [{'text': caption.goto[this.language], 'callback_data': 'goto'}]
+            ]
+        });
+    }
 }
 
 

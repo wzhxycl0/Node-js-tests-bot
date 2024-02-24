@@ -3,7 +3,7 @@ const db = new sqlite3.Database('user.db');
 
 db.run('CREATE TABLE IF NOT EXISTS user      (id int, language str, state int DEFAULT 0)');
 db.run('CREATE TABLE IF NOT EXISTS test      (creator_id int, title str)');
-db.run('CREATE TABLE IF NOT EXISTS questions (test_id int, postion int)');
+db.run('CREATE TABLE IF NOT EXISTS questions (test_id int, postion int, correct bool DEFAULT falseь)');
 
 
 class User {

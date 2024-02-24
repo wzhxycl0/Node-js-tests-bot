@@ -86,12 +86,14 @@ const start = () => {
                 reply_markup: await kb.render_tests(user)});
             
             } else if ( text.startsWith('test:') ) {
-                let test = new Test(text.split(':')[1]);
+                let test_id = text.split(':')[1];
+                let test = new Test(test_id);
 
                 await bot.editMessageText(
                 `Выбранный тест: ${await test.get_name()}\n` + 
                 `Количество вопросов: ${await test.get_questions_number()}`, 
-                {message_id: message_id, chat_id: chat});
+                {message_id: message_id, chat_id: chat,
+                reply_markup: kb.test_edit(test_id)});
             }
         }
     });
