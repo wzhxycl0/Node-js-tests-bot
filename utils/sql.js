@@ -1,8 +1,9 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('user.db');
 
-db.run('CREATE TABLE IF NOT EXISTS user (id int, language str, state int DEFAULT 0)');
-db.run('CREATE TABLE IF NOT EXISTS test (creator_id int, title str)');
+db.run('CREATE TABLE IF NOT EXISTS user      (id int, language str, state int DEFAULT 0)');
+db.run('CREATE TABLE IF NOT EXISTS test      (creator_id int, title str)');
+db.run('CREATE TABLE IF NOT EXISTS questions (test_id int, postion int)');
 
 
 class User {
@@ -51,7 +52,7 @@ class User {
 
     get_tests() {
         return new Promise(resolve => {
-            db.all('SELECT title FROM test WHERE creator_id=?', [this.user], (err, row) => {
+            db.all('SELECT title, rowid FROM test WHERE creator_id=?', [this.user], (err, row) => {
                 resolve(row);
             });
         });
@@ -60,7 +61,37 @@ class User {
     create_test(title) {
         db.run('INSERT INTO test VALUES (?,?)', [this.user, title]);
     }
+
+    get_last_test() {
+        return new Promise(resolve => {
+            db.get('SELECT rowid FROM test ORDER BY rowid DESC', (err, row) => {
+                resolve(row.rowid);
+            });
+        });
+    }
 }
 
 
-module.exports = User;
+class Test {
+    constructor(id) {
+        this.id = id;
+    }
+
+    get_name() {
+        return new Promise(resolve => {
+            db.get('SELECT title FROM test WHERE rowid=?', [this.id], (err, row) => {
+                resolve(row.title);
+            });
+        });
+    }
+
+    get_questions_number() {
+        return new Promise(resolve => {
+            db.all('SELECT * FROM questions WHERE test_id=?', [this.id], (err, row) => {
+                resolve(row.length);
+            });
+        });
+    }
+}
+
+module.exports = { User, Test };

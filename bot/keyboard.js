@@ -55,7 +55,7 @@ class Keyboard {
             let kb = [];
     
             row.forEach((row) => {
-                kb.push([{'text': row.title, 'callback_data': `test:${row.title}`}]);
+                kb.push([{'text': row.title, 'callback_data': `test:${row.rowid}`}]);
             });
 
             kb.push([{'text': caption.goto[this.language], 'callback_data': 'goto'}])
@@ -66,10 +66,10 @@ class Keyboard {
         });
     }
 
-    test_created(title) {
+    test_created(id) {
         return JSON.stringify({
             inline_keyboard: [
-                [{'text': caption.edit_test[this.language], 'callback_data': `test:${title}`}]
+                [{'text': caption.edit_test[this.language], 'callback_data': `test:${id}`}]
             ]
         });
     }
