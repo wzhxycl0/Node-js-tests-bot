@@ -48,5 +48,10 @@
         "en": "The test has been successfully created!",
         "ru": "Тест успешно создан!",
         "ua": "Тест успішно створено!"
+    },
+    "edit_test": {
+        "en": "Edit the created test!",
+        "ru": "Редактировать созданный тест!",
+        "ua": "Редагувати створений тест!"
     }
 }

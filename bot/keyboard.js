@@ -65,6 +65,14 @@ class Keyboard {
             }));
         });
     }
+
+    test_created(title) {
+        return JSON.stringify({
+            inline_keyboard: [
+                [{'text': caption.edit_test[this.language], 'callback_data': `test:${title}`}]
+            ]
+        });
+    }
 }
 
 
