@@ -16,8 +16,9 @@ const start = () => {
             await bot.sendMessage(chat, 'Select a language!', { reply_markup: language_kb });
 
         } else if ( await user.get_state() == 1 ) {
-            await bot.sendMessage(chat, text);
+            await bot.sendMessage(chat, caption.created_test[await user.get_language()]);
             await user.set_state(0);
+            await user.create_test(text);
 
         } else {
             const language = await user.get_language();
@@ -62,11 +63,11 @@ const start = () => {
                 reply_markup: kb.profile()});
             
             } else if ( text === 'create_test' ) {
-                await user.set_state(1);
                 await bot.editMessageText(caption.set_test_name[language], 
                     {message_id: data.message.message_id, chat_id: chat,
                     reply_markup: kb.create_test()});
-            
+                    
+                await user.set_state(1);
             } else if ( text === 'cancel' ) {
                 await bot.editMessageText(caption.menu[language], 
                 {message_id: data.message.message_id, chat_id: chat,
@@ -76,7 +77,7 @@ const start = () => {
             } else if ( text === 'get_tests' ) {
                 await bot.editMessageText(caption.get_tests[language], 
                 {message_id: data.message.message_id, chat_id: chat,
-                reply_markup: kb.render_tests(user)});
+                reply_markup: await kb.render_tests(user)});
             }
         }
     });

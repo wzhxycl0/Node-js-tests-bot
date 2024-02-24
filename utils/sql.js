@@ -51,10 +51,14 @@ class User {
 
     get_tests() {
         return new Promise(resolve => {
-            db.all('SELECT title FROM test WHERE id=?', [this.user], (err, row) => {
-                return row;
+            db.all('SELECT title FROM test WHERE creator_id=?', [this.user], (err, row) => {
+                resolve(row);
             });
         });
+    }
+
+    create_test(title) {
+        db.run('INSERT INTO test VALUES (?,?)', [this.user, title]);
     }
 }
 

@@ -43,5 +43,10 @@
         "en": "Get my tests",
         "ru": "Получить мои тесты",
         "ua": "Отримати мої тести"
+    },
+    "created_test": {
+        "en": "The test has been successfully created!",
+        "ru": "Тест успешно создан!",
+        "ua": "Тест успішно створено!"
     }
 }
