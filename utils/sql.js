@@ -3,7 +3,8 @@ const db = new sqlite3.Database('user.db');
 
 db.run('CREATE TABLE IF NOT EXISTS user      (id int, language str, state int DEFAULT 0)');
 db.run('CREATE TABLE IF NOT EXISTS test      (creator_id int, title str)');
-db.run('CREATE TABLE IF NOT EXISTS questions (test_id int, postion int, correct bool DEFAULT falseь)');
+db.run('CREATE TABLE IF NOT EXISTS questions (test_id int, postion int)');
+db.run('CREATE TABLE IF NOT EXISTS answers   (question_id int, answer str, correct bool DEFAULT false)')
 
 
 class User {
@@ -64,7 +65,7 @@ class User {
 
     get_last_test() {
         return new Promise(resolve => {
-            db.get('SELECT rowid FROM test ORDER BY rowid DESC', (err, row) => {
+            db.get('SELECT ROWID FROM test ORDER BY rowid DESC', (err, row) => {
                 resolve(row.rowid);
             });
         });
@@ -91,6 +92,10 @@ class Test {
                 resolve(row.length);
             });
         });
+    }
+
+    add_question(text) {
+        db.run('INSERT INTO question');
     }
 }
 

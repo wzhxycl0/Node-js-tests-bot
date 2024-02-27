@@ -18,11 +18,16 @@ const start = () => {
         } else if ( await user.get_state() == 1 ) {
             let language = await user.get_language();
             let kb = new Keyboard(language);
-
+            
+            await user.create_test(text);
             await bot.sendMessage(chat, caption.created_test[language], 
             { reply_markup: kb.test_created(await user.get_last_test()) });
             await user.set_state(0);
-            await user.create_test(text);
+
+        } else if (await user.get_state() == 2 ) {
+            
+            
+            await user.set_state(0);
 
         } else {
             const language = await user.get_language();
@@ -88,12 +93,21 @@ const start = () => {
             } else if ( text.startsWith('test:') ) {
                 let test_id = text.split(':')[1];
                 let test = new Test(test_id);
+                let questions = await test.get_questions_number()
 
                 await bot.editMessageText(
-                `Выбранный тест: ${await test.get_name()}\n` + 
-                `Количество вопросов: ${await test.get_questions_number()}`, 
+                `${caption.test_menu[language][0]}: ${await test.get_name()}\n` + 
+                `${caption.test_menu[language][1]}: ${questions}`, 
                 {message_id: message_id, chat_id: chat,
-                reply_markup: kb.test_edit(test_id)});
+                reply_markup: kb.test_edit(test_id, questions+1)});
+            
+            } else if ( text.startsWith('add:') ) {
+                let test_id = text.split(':')[1];
+                let test = new Test(test_id);
+
+                await bot.editMessageText(caption.write_question[language], { reply_markup: kb.cancel() });
+
+                user.set_state(2);
             }
         }
     });

@@ -74,11 +74,19 @@ class Keyboard {
         });
     }
 
-    test_edit(id) {
+    test_edit(id, position) {
         return JSON.stringify({
             inline_keyboard: [
-                [{'text': caption.add_question[this.language], 'callback_data': `add:${id}`}],
+                [{'text': caption.add_question[this.language], 'callback_data': `add:${id}:${position}`}],
                 [{'text': caption.goto[this.language], 'callback_data': 'goto'}]
+            ]
+        });
+    }
+
+    cancel() {
+        return JSON.stringify({
+            inline_keyboard: [
+                [{'text': caption.cancel[this.language], 'callback_data': 'cancel'}]
             ]
         });
     }

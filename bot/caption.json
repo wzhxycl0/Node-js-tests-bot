@@ -58,5 +58,15 @@
         "en": "Add a question",
         "ru": "Добавить вопрос",
         "ua": "Додати запитання"
+    },
+    "test_menu": {
+        "en": ["Selected test", "Number of questions"],
+        "ru": ["Выбранный тест", "Количество вопросов"],
+        "ua": ["Обраний тест", "Кількість запитань"]
+    },
+    "write_question": {
+        "en": "Enter a question",
+        "ru": "Введи вопрос",
+        "ua": "Введи питання"
     }
 }
