@@ -68,5 +68,10 @@
         "en": "Enter a question",
         "ru": "Введи вопрос",
         "ua": "Введи питання"
+    },
+    "question_created": {
+        "en": "The question has been successfully created.",
+        "ru": "Вопрос успешно создан.",
+        "ua": "Питання успішно створено."
     }
 }

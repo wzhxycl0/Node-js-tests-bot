@@ -1,9 +1,9 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('user.db');
 
-db.run('CREATE TABLE IF NOT EXISTS user      (id int, language str, state int DEFAULT 0)');
+db.run(`CREATE TABLE IF NOT EXISTS user      (id int, language str, state char DEFAULT '0')`);
 db.run('CREATE TABLE IF NOT EXISTS test      (creator_id int, title str)');
-db.run('CREATE TABLE IF NOT EXISTS questions (test_id int, postion int)');
+db.run('CREATE TABLE IF NOT EXISTS questions (test_id int, text str, position int)');
 db.run('CREATE TABLE IF NOT EXISTS answers   (question_id int, answer str, correct bool DEFAULT false)')
 
 
@@ -18,7 +18,7 @@ class User {
                 resolve(!Boolean(row));
             });
         });
-    }
+}
 
     reg(language) {
         return new Promise(async resolve => {
@@ -42,7 +42,11 @@ class User {
     get_state() {
         return new Promise(resolve => {
             db.get('SELECT state FROM user WHERE id=?', [this.user], (err, row) => {
-                resolve(row.state);
+                try {
+                    resolve(row.state);
+                } catch {
+                    resolve('0');
+                }
             });
         });
     }
@@ -94,8 +98,8 @@ class Test {
         });
     }
 
-    add_question(text) {
-        db.run('INSERT INTO question');
+    add_question(text, position) {
+        db.run('INSERT INTO questions VALUES (?,?,?)', [this.id, text, position]);
     }
 }
 

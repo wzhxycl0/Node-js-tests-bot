@@ -11,21 +11,28 @@ const start = () => {
         const chat = data.chat.id;
         const text = data.text;
         const user = new User(data.from.id);
+        const state = new String(await user.get_state());
 
         if (await user.unavailability()) {
             await bot.sendMessage(chat, 'Select a language!', { reply_markup: language_kb });
 
-        } else if ( await user.get_state() == 1 ) {
+        } else if ( state != '0' ) {
             let language = await user.get_language();
-            let kb = new Keyboard(language);
+            if ( state == '1' ) {
+                let kb = new Keyboard(language);
             
-            await user.create_test(text);
-            await bot.sendMessage(chat, caption.created_test[language], 
-            { reply_markup: kb.test_created(await user.get_last_test()) });
-            await user.set_state(0);
+                await user.create_test(text);
+                await bot.sendMessage(chat, caption.created_test[language], 
+                { reply_markup: kb.test_created(await user.get_last_test()) });
+            
+            } else if (state.startsWith('add')) {
+                let args = state.split(':');
+                let test = new Test(args[1]);
+                let pos = args[2];
 
-        } else if (await user.get_state() == 2 ) {
-            
+                await test.add_question(text, pos);
+                await bot.sendMessage(chat, caption.question_created[language]);
+            }
             
             await user.set_state(0);
 
@@ -89,7 +96,7 @@ const start = () => {
                 await bot.editMessageText(caption.get_tests[language],
                 {message_id: message_id, chat_id: chat,
                 reply_markup: await kb.render_tests(user)});
-            
+
             } else if ( text.startsWith('test:') ) {
                 let test_id = text.split(':')[1];
                 let test = new Test(test_id);
@@ -102,12 +109,16 @@ const start = () => {
                 reply_markup: kb.test_edit(test_id, questions+1)});
             
             } else if ( text.startsWith('add:') ) {
-                let test_id = text.split(':')[1];
+                let output = text.split(':');
+                let test_id = output[1];
+                let position = output[2];
                 let test = new Test(test_id);
 
-                await bot.editMessageText(caption.write_question[language], { reply_markup: kb.cancel() });
+                await bot.editMessageText(caption.write_question[language], {
+                    chat_id: chat, message_id: message_id,
+                    reply_markup: kb.cancel() });
 
-                user.set_state(2);
+                user.set_state(`add:${test_id}:${position}`);
             }
         }
     });
