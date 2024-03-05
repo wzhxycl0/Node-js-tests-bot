@@ -70,8 +70,18 @@
         "ua": "Введи питання"
     },
     "question_created": {
-        "en": "The question has been successfully created.",
-        "ru": "Вопрос успешно создан.",
-        "ua": "Питання успішно створено."
+        "en": "The question has been successfully created. Now enter the correct answer to this question",
+        "ru": "Вопрос успешно создан. Теперь введи правильный ответ на этот вопрос",
+        "ua": "Питання успішно створено. Тепер введи правильну відповідь на це запитання"
+    },
+    "insert_question": {
+        "en": "Now enter wrong answers to this question, when you are done click finish",
+        "ru": "Теперь вводи неправильные ответы на этот вопрос, когда закончишь нажимай кнопку закончить",
+        "ua": "Тепер вводь неправильні відповіді на це запитання, коли закінчиш натискай кнопку закінчити"
+    },
+    "end": {
+        "en": "Finish",
+        "ru": "Закончить",
+        "ua": "Закінчити"
     }
 }

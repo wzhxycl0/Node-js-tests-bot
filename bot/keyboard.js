@@ -90,6 +90,16 @@ class Keyboard {
             ]
         });
     }
+
+    stop_add_answer(test_id, user) {
+        user.set_state(0);
+
+        return JSON.stringify({
+            inline_keyboard: [
+                [{'text': caption.end[this.language], 'callback_data': `test:${test_id}`}]
+            ]
+        });
+    }
 }
 
 

@@ -4,7 +4,7 @@ const db = new sqlite3.Database('user.db');
 db.run(`CREATE TABLE IF NOT EXISTS user      (id int, language str, state char DEFAULT '0')`);
 db.run('CREATE TABLE IF NOT EXISTS test      (creator_id int, title str)');
 db.run('CREATE TABLE IF NOT EXISTS questions (test_id int, text str, position int)');
-db.run('CREATE TABLE IF NOT EXISTS answers   (question_id int, answer str, correct bool DEFAULT false)')
+db.run('CREATE TABLE IF NOT EXISTS answers   (pos int, text str, correct bool)')
 
 
 class User {
@@ -100,6 +100,10 @@ class Test {
 
     add_question(text, position) {
         db.run('INSERT INTO questions VALUES (?,?,?)', [this.id, text, position]);
+    }
+
+    add_answer(text, pos, correct) {
+        db.run('INSERT INTO answers VALUES (?,?,?)', [pos, text, correct]);
     }
 }
 

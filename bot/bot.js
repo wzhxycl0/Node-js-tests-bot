@@ -24,18 +24,38 @@ const start = () => {
                 await user.create_test(text);
                 await bot.sendMessage(chat, caption.created_test[language], 
                 { reply_markup: kb.test_created(await user.get_last_test()) });
+                
+                await user.set_state(0);
             
-            } else if (state.startsWith('add')) {
+            } else {
                 let args = state.split(':');
-                let test = new Test(args[1]);
+                let test_id = args[1];
+                let test = new Test(test_id);
                 let pos = args[2];
-
-                await test.add_question(text, pos);
-                await bot.sendMessage(chat, caption.question_created[language],
+                
+                if ( state.startsWith('add1') ) {
+                    await bot.sendMessage(chat, caption.question_created[language],
                     { reply_markup: kb.goto() });
+                    await test.add_question(text, pos);
+
+                    await user.set_state(`add2:${test_id}:${pos}`);
+                
+                } else if ( state.startsWith('add2') ) {
+                    await bot.sendMessage(chat, caption.insert_question[language],
+                    {reply_markup: kb.stop_add_answer(test_id, user)});
+
+                    await user.set_state(`add3:${test_id}:${pos}`);
+                    await test.add_answer(text, pos, true);
+                
+                } else if ( state.startsWith('add3') ) {
+                    await bot.sendMessage(chat, caption.insert_question[language],
+                    {reply_markup: kb.stop_add_answer(test_id, user)});
+
+                    await test.add_answer(text, pos, false);
+                }
             }
             
-            await user.set_state(0);
+            
 
         } else {
             const language = await user.get_language();
@@ -113,14 +133,14 @@ const start = () => {
                 let output = text.split(':');
                 let test_id = output[1];
                 let position = output[2];
-                let test = new Test(test_id);
 
                 await bot.editMessageText(caption.write_question[language], {
                     chat_id: chat, message_id: message_id,
                     reply_markup: kb.cancel() });
 
-                user.set_state(`add:${test_id}:${position}`);
-            }
+                user.set_state(`add1:${test_id}:${position}`);
+            
+            } 
         }
     });
 };
