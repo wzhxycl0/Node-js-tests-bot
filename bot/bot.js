@@ -18,9 +18,9 @@ const start = () => {
 
         } else if ( state != '0' ) {
             let language = await user.get_language();
-            if ( state == '1' ) {
-                let kb = new Keyboard(language);
+            let kb = new Keyboard(language);
             
+            if ( state == '1' ) {
                 await user.create_test(text);
                 await bot.sendMessage(chat, caption.created_test[language], 
                 { reply_markup: kb.test_created(await user.get_last_test()) });
@@ -31,7 +31,8 @@ const start = () => {
                 let pos = args[2];
 
                 await test.add_question(text, pos);
-                await bot.sendMessage(chat, caption.question_created[language]);
+                await bot.sendMessage(chat, caption.question_created[language],
+                    { reply_markup: kb.goto() });
             }
             
             await user.set_state(0);
